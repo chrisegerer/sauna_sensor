@@ -1,0 +1,41 @@
+- file: "gfonts://Material+Symbols+Outlined"
+  id: icons_extralarge
+  size: 72
+  bpp: 4
+  glyphs: [
+    "\U0000F6F7" # mdi-sauna
+  ]
+- file: "fonts/Helvetica.ttf"
+  id: helvetica_large
+  size: 42
+  bpp: 4
+  extras:
+    - file: "fonts/materialdesignicons-webfont.ttf"
+      glyphs: [
+        "\U000F0504", # mdi-temperature-celsius
+      ]
+- file: "fonts/Helvetica.ttf"
+  id: helvetica_mid
+  size: 32
+  bpp: 4
+  extras:
+    - file: "fonts/materialdesignicons-webfont.ttf"
+      glyphs: [
+        "\U000F0F55", # mdi-home-thermometer-outline
+        "\U000F058E", # mdi-water-percent
+        "\U000F092B", # mdi-wifi-alert
+        "\U000F091F", # mdi-wifi-strength-1
+        "\U000F0922", # mdi-wifi-strength-2
+        "\U000F0925", # mdi-wifi-strength-3
+        "\U000F0928", # mdi-wifi-strength-4
+      ]
+- file: "fonts/Helvetica.ttf"
+  id: helvetica_small
+  size: 24
+  bpp: 4
+  extras:
+    - file: "fonts/materialdesignicons-webfont.ttf"
+      glyphs: [
+        "\U000F0504", # mdi-temperature-celsius
+        "\U000F03F0", # mdi-percent
+      ]
