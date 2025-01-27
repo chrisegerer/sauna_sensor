@@ -173,6 +173,8 @@ sensor:
     pin: GPIO04
     name: "Sauna Battery Voltage"
     samples: 10
+    attenuation: 12db
+    update_interval: 60s
 
 font: !include fonts.yaml
 
