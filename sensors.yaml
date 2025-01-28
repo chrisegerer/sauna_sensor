@@ -1,0 +1,108 @@
+# Sensirion SHT40 sensor
+- platform: sht4x
+  temperature:
+    name: "Sauna Temperature"
+    on_value:
+      - lvgl.label.update:
+          id: lbl_temp
+          text: !lambda |-
+            static char buf[10];
+            snprintf(buf, sizeof(buf), "%.1f \U000F0504", x);
+            return buf;
+  humidity:
+    name: "Sauna Relative Humidity"
+    on_value:
+      - lvgl.label.update:
+          id: lbl_hum
+          text: !lambda |-
+            static char buf[10];
+            snprintf(buf, sizeof(buf), "%.1f \U000F03F0", x);
+            return buf;
+# WiFi sensor
+- platform: wifi_signal
+  name: "Sauna WiFi Signal"
+  id: wifi_signal_db
+  update_interval: 60s
+  entity_category: "diagnostic"
+- platform: copy
+  source_id: wifi_signal_db
+  name: "Sauna WiFi Signal Percentage"
+  filters:
+    - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+  unit_of_measurement: "Signal %"
+  entity_category: "diagnostic"
+  device_class: ""
+  on_value:
+    if:
+      condition:
+        wifi.connected:
+      then:
+        - lvgl.label.update:
+            id: lbl_wifi_icon
+            text: !lambda |-
+              if (x < 20.0) {
+                return "\U000F091F"; // mdi-wifi-strength-1
+              } else if (x < 40.0) {
+                return "\U000F0922"; // mdi-wifi-strength-2
+              } else if (x < 60.0) {
+                return "\U000F0925"; // mdi-wifi-strength-3
+              } else {
+                return "\U000F0928"; // mdi-wifi-strength-4
+              }
+      else:
+        - lvgl.label.update:
+            id: lbl_wifi_icon
+            text: !lambda |-
+              return "\U000F092B"; // mdi-wifi-alert
+# Outdoor temperature from heat pump
+- platform: homeassistant
+  id: outside_temperature
+  entity_id: sensor.kuutsu_13_outdoor_temperature
+  on_value:
+    - lvgl.label.update:
+        id: lbl_temp_outside
+        text: !lambda |-
+          static char buf[10];
+          snprintf(buf, sizeof(buf), "%.1f \U000F0504", x);
+          return buf;
+# Battery voltage
+- platform: adc
+  pin: GPIO04
+  name: "Sauna Battery Voltage"
+  id: battery_voltage
+  entity_category: "diagnostic"
+  samples: 10
+  attenuation: 12db
+  update_interval: 60s
+  filters:
+    - multiply: 2.0
+# Battery percentage
+- platform: copy
+  source_id: battery_voltage
+  name: "Sauna Battery Percentage"
+  filters:
+    - calibrate_linear:
+        - 3.0 -> 0.0
+        - 4.2 -> 100.0
+    - clamp:
+        min_value: 0.0
+        max_value: 100.0
+  unit_of_measurement: "%"
+  entity_category: "diagnostic"
+  device_class: "battery"
+  on_value:
+    - lvgl.label.update:
+        id: lbl_battery_icon
+        text: !lambda |-
+          if (x < 10.0) {
+            return "\U000F10CD"; // mdi-battery-alert-variant-outline
+          } else if (x < 30.0) {
+            return "\U000F12A1"; // mdi-battery-low
+          } else if (x < 60.0) {
+            return "\U000F12A1"; // mdi-battery-medium
+          } else {
+            return "\U000F12A3"; // mdi-battery-high
+          }
+# ESP32 internal temperature
+- platform: internal_temperature
+  name: "Sauna ESP32 Internal Temperature"

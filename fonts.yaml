@@ -28,6 +28,10 @@
         "\U000F0922", # mdi-wifi-strength-2
         "\U000F0925", # mdi-wifi-strength-3
         "\U000F0928", # mdi-wifi-strength-4
+        "\U000F10CD", # mdi-battery-alert-variant-outline
+        "\U000F12A1", # mdi-battery-low
+        "\U000F12A2", # mdi-battery-medium
+        "\U000F12A3", # mdi-battery-high
       ]
 - file: "fonts/Helvetica.ttf"
   id: helvetica_small

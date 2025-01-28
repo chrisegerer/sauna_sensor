@@ -1,0 +1,18 @@
+- platform: ili9xxx
+  model: st7789v
+  dimensions:
+    width: 280
+    height: 240
+    offset_width: 20
+    offset_height: 0
+  transform:
+    swap_xy: true
+    mirror_x: true
+  cs_pin: GPIO03
+  dc_pin: GPIO05
+  reset_pin: GPIO21
+  color_palette: GRAYSCALE
+  invert_colors: false
+  #show_test_card: true
+  auto_clear_enabled: false
+  update_interval: never

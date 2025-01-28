@@ -1,0 +1,114 @@
+buffer_size: 25%
+style_definitions:
+  - id: header_footer
+    width: 100%
+    height: 60
+    bg_opa: TRANSP
+    border_opa: TRANSP
+    radius: 0
+    pad_all: 0
+    text_font: helvetica_mid
+top_layer:
+  styles: header_footer
+  widgets:
+    - label:
+        id: lbl_header
+        text: "Saun"
+        align: top_left
+        x: 18
+        y: 8
+    - label:
+        id: lbl_wifi_icon
+        text: "\U000F092B" # default is wifi-alert
+        align: top_right
+        x: -18
+        y: 6
+    - label:
+        id: lbl_battery_icon
+        text: "\U000F10CD" # default is battery-alert-variant-outline
+        align: top_right
+        x: -48
+        y: 6
+    - label:
+        id: lbl_date
+        text: "--.--.----"
+        text_font: helvetica_small
+        align: bottom_left
+        x: 18
+        y: -8
+    - label:
+        id: lbl_time
+        text: "--:--"
+        text_font: helvetica_small
+        align: bottom_right
+        x: -18
+        y: -8
+widgets:
+  - obj:
+      align: CENTER
+      width: 100%
+      height: 100%
+      pad_all: 6
+      pad_top: 40
+      pad_bottom: 40
+      bg_opa: TRANSP
+      border_opa: TRANSP
+      layout:
+        type: GRID
+        grid_columns: [FR(30), FR(30), FR(40)]
+        grid_rows: [FR(30), FR(20), FR(30), FR(20)]
+        pad_row: 4
+        pad_column: 4
+      widgets:
+        - label:
+            id: lbl_sauna_icon
+            grid_cell_column_pos: 0
+            grid_cell_row_pos: 0
+            grid_cell_column_span: 2
+            grid_cell_row_span: 2
+            grid_cell_x_align: CENTER
+            grid_cell_y_align: CENTER
+            text: "\U0000F6F7"
+            text_font: icons_extralarge
+        - label:
+            id: lbl_temp
+            grid_cell_column_pos: 0
+            grid_cell_row_pos: 2
+            grid_cell_column_span: 2
+            grid_cell_row_span: 2
+            grid_cell_x_align: CENTER
+            grid_cell_y_align: CENTER
+            text: "--.- \U000F0504"
+            text_font: helvetica_large
+        - label:
+            id: lbl_hum_icon
+            grid_cell_column_pos: 2
+            grid_cell_row_pos: 0
+            grid_cell_x_align: CENTER
+            grid_cell_y_align: CENTER
+            text: "\U000F058E"
+            text_font: helvetica_mid
+        - label:
+            id: lbl_hum
+            grid_cell_column_pos: 2
+            grid_cell_row_pos: 1
+            grid_cell_x_align: CENTER
+            grid_cell_y_align: CENTER
+            text: "-.- \U000F03F0"
+            text_font: helvetica_small
+        - label:
+            id: lbl_temp_icon_outside
+            grid_cell_column_pos: 2
+            grid_cell_row_pos: 2
+            grid_cell_x_align: CENTER
+            grid_cell_y_align: CENTER
+            text: "\U000F0F55"
+            text_font: helvetica_mid
+        - label:
+            id: lbl_temp_outside
+            grid_cell_column_pos: 2
+            grid_cell_row_pos: 3
+            grid_cell_x_align: CENTER
+            grid_cell_y_align: CENTER
+            text: "-.- \U000F0504"
+            text_font: helvetica_small
