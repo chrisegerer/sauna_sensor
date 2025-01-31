@@ -43,72 +43,157 @@ top_layer:
         align: bottom_right
         x: -18
         y: -8
-widgets:
-  - obj:
-      align: CENTER
-      width: 100%
-      height: 100%
-      pad_all: 6
-      pad_top: 40
-      pad_bottom: 40
-      bg_opa: TRANSP
-      border_opa: TRANSP
-      layout:
-        type: GRID
-        grid_columns: [FR(30), FR(30), FR(40)]
-        grid_rows: [FR(30), FR(20), FR(30), FR(20)]
-        pad_row: 4
-        pad_column: 4
-      widgets:
-        - label:
-            id: lbl_sauna_icon
-            grid_cell_column_pos: 0
-            grid_cell_row_pos: 0
-            grid_cell_column_span: 2
-            grid_cell_row_span: 2
-            grid_cell_x_align: CENTER
-            grid_cell_y_align: CENTER
-            text: "\U0000F6F7"
-            text_font: icons_extralarge
-        - label:
-            id: lbl_temp
-            grid_cell_column_pos: 0
-            grid_cell_row_pos: 2
-            grid_cell_column_span: 2
-            grid_cell_row_span: 2
-            grid_cell_x_align: CENTER
-            grid_cell_y_align: CENTER
-            text: "--.- \U000F0504"
-            text_font: helvetica_large
-        - label:
-            id: lbl_hum_icon
-            grid_cell_column_pos: 2
-            grid_cell_row_pos: 0
-            grid_cell_x_align: CENTER
-            grid_cell_y_align: CENTER
-            text: "\U000F058E"
-            text_font: helvetica_mid
-        - label:
-            id: lbl_hum
-            grid_cell_column_pos: 2
-            grid_cell_row_pos: 1
-            grid_cell_x_align: CENTER
-            grid_cell_y_align: CENTER
-            text: "-.- \U000F03F0"
-            text_font: helvetica_small
-        - label:
-            id: lbl_temp_icon_outside
-            grid_cell_column_pos: 2
-            grid_cell_row_pos: 2
-            grid_cell_x_align: CENTER
-            grid_cell_y_align: CENTER
-            text: "\U000F0F55"
-            text_font: helvetica_mid
-        - label:
-            id: lbl_temp_outside
-            grid_cell_column_pos: 2
-            grid_cell_row_pos: 3
-            grid_cell_x_align: CENTER
-            grid_cell_y_align: CENTER
-            text: "-.- \U000F0504"
-            text_font: helvetica_small
+pages:
+  - id: main_page
+    widgets:
+      - obj:
+          align: CENTER
+          width: 100%
+          height: 100%
+          pad_all: 6
+          pad_top: 50
+          pad_bottom: 40
+          bg_opa: TRANSP
+          border_opa: TRANSP
+          layout:
+            type: GRID
+            grid_columns: [FR(30), FR(30), FR(40)]
+            grid_rows: [FR(30), FR(20), FR(30), FR(20)]
+            pad_row: 4
+            pad_column: 4
+          widgets:
+            - label:
+                id: lbl_sauna_icon
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 0
+                grid_cell_column_span: 2
+                grid_cell_row_span: 2
+                grid_cell_x_align: CENTER
+                grid_cell_y_align: CENTER
+                text: "\U0000F6F7"
+                text_font: icons_extralarge
+            - label:
+                id: lbl_temp
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 2
+                grid_cell_column_span: 2
+                grid_cell_row_span: 2
+                grid_cell_x_align: CENTER
+                grid_cell_y_align: CENTER
+                text: "--.- \U000F0504"
+                text_font: helvetica_large
+            - label:
+                id: lbl_hum_icon
+                grid_cell_column_pos: 2
+                grid_cell_row_pos: 0
+                grid_cell_x_align: CENTER
+                grid_cell_y_align: CENTER
+                text: "\U000F058E"
+                text_font: helvetica_mid
+            - label:
+                id: lbl_hum
+                grid_cell_column_pos: 2
+                grid_cell_row_pos: 1
+                grid_cell_x_align: CENTER
+                grid_cell_y_align: CENTER
+                text: "-.- \U000F03F0"
+                text_font: helvetica_small
+            - label:
+                id: lbl_temp_icon_outside
+                grid_cell_column_pos: 2
+                grid_cell_row_pos: 2
+                grid_cell_x_align: CENTER
+                grid_cell_y_align: CENTER
+                text: "\U000F0F55"
+                text_font: helvetica_mid
+            - label:
+                id: lbl_temp_outside
+                grid_cell_column_pos: 2
+                grid_cell_row_pos: 3
+                grid_cell_x_align: CENTER
+                grid_cell_y_align: CENTER
+                text: "-.- \U000F0504"
+                text_font: helvetica_small
+  - id: diagnostic_page
+    widgets:
+      - obj:
+          align: CENTER
+          width: 100%
+          height: 100%
+          pad_all: 6
+          pad_top: 50
+          pad_bottom: 40
+          bg_opa: TRANSP
+          border_opa: TRANSP
+          layout:
+            type: GRID
+            grid_columns: [FR(30), FR(70)]
+            grid_rows: [FR(25), FR(25), FR(25), FR(25)]
+            pad_row: 4
+            pad_column: 8
+          widgets:
+            - label:
+                id: lbl_diagnostic_ipv4
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 0
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "IPv4:"
+            - label:
+                id: lbl_diagnostic_ipv4_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 0
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "--"
+            - label:
+                id: lbl_diagnostic_ssid
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 1
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "SSID:"
+            - label:
+                id: lbl_diagnostic_ssid_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 1
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "--"
+            - label:
+                id: lbl_diagnostic_mac
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 2
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "MAC:"
+            - label:
+                id: lbl_diagnostic_mac_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 2
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "--"
+            - label:
+                id: lbl_diagnostic_dns
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 3
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "DNS:"
+            - label:
+                id: lbl_diagnostic_dns_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 3
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "--"
+                    

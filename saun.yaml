@@ -49,6 +49,7 @@ light:
     id: display_bl
     name: "Display Backlight"
     output: display_bl_output
+    restore_mode: ALWAYS_ON
 
 time:
   - platform: homeassistant
@@ -134,6 +135,62 @@ binary_sensor:
     on_press:
       then:
         - light.toggle: display_bl
+    on_double_click:
+      min_length: 50ms
+      max_length: 350ms
+      then:
+        - lvgl.page.next:
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "Sauna IP Address"
+      id: sauna_ip_address
+      entity_category: "diagnostic"
+      on_value:
+        - lvgl.label.update:
+            id: lbl_diagnostic_ipv4_value
+            text: !lambda |-
+              static char buf[42];
+              snprintf(buf, sizeof(buf), "%s", x.c_str());
+              return buf;
+    ssid:
+      name: "Sauna SSID"
+      id: sauna_ssid
+      entity_category: "diagnostic"
+      on_value:
+        - lvgl.label.update:
+            id: lbl_diagnostic_ssid_value
+            text: !lambda |-
+              static char buf[42];
+              snprintf(buf, sizeof(buf), "%s", x.c_str());
+              return buf;
+    bssid:
+      name: "Sauna BSSID"
+      id: sauna_bssid
+      entity_category: "diagnostic"
+    mac_address:
+      name: "Sauna MAC Address"
+      id: sauna_mac_address
+      entity_category: "diagnostic"
+      on_value:
+        - lvgl.label.update:
+            id: lbl_diagnostic_mac_value
+            text: !lambda |-
+              static char buf[42];
+              snprintf(buf, sizeof(buf), "%s", x.c_str());
+              return buf;
+    dns_address:
+      name: "Sauna DNS Address"
+      id: sauna_dns_address
+      entity_category: "diagnostic"
+      on_value:
+        - lvgl.label.update:
+            id: lbl_diagnostic_dns_value
+            text: !lambda |-
+              static char buf[42];
+              snprintf(buf, sizeof(buf), "%s", x.c_str());
+              return buf;
 
 sensor: !include sensors.yaml
 

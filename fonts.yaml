@@ -43,3 +43,7 @@
         "\U000F0504", # mdi-temperature-celsius
         "\U000F03F0", # mdi-percent
       ]
+- file: "fonts/Helvetica.ttf"
+  id: helvetica_verysmall
+  size: 20
+  bpp: 4
