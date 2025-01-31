@@ -8,6 +8,18 @@ style_definitions:
     radius: 0
     pad_all: 0
     text_font: helvetica_mid
+keypads:
+  - id: lvgl_keypad
+    home: home_button
+on_idle:
+  - timeout: !lambda "return (id(display_timeout).state * 500);" # return to main page after half of display timeout
+    then:
+      - lvgl.page.show: main_page
+  - timeout: !lambda "return (id(display_timeout).state * 1000);"
+    then:
+      - logger.log: "LVGL is idle"
+      - light.turn_off: display_bl
+      - lvgl.pause:
 top_layer:
   styles: header_footer
   widgets:

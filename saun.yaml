@@ -126,20 +126,28 @@ switch:
 
 binary_sensor:
   - platform: gpio
+    id: home_button
+    entity_category: "diagnostic"
     pin:
       number: 20
       mode:
         input: true
         pullup: true
+      inverted: true
     name: "Sauna Push Button"
-    on_press:
-      then:
-        - light.toggle: display_bl
     on_double_click:
       min_length: 50ms
       max_length: 350ms
       then:
         - lvgl.page.next:
+    on_release:
+      - if:
+          condition: lvgl.is_paused
+          then:
+            - logger.log: "LVGL resuming"
+            - lvgl.resume:
+            - lvgl.widget.redraw:
+            - light.turn_on: display_bl
 
 text_sensor:
   - platform: wifi_info
@@ -198,3 +206,17 @@ font: !include fonts.yaml
 
 display: !include display.yaml
 lvgl: !include lvgl.yaml
+
+number:
+  - platform: template
+    name: LVGL Screen Timeout
+    entity_category: "config"
+    optimistic: true
+    id: display_timeout
+    unit_of_measurement: "s"
+    initial_value: 60
+    restore_value: true
+    min_value: 30
+    max_value: 300
+    step: 10
+    mode: box
