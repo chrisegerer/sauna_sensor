@@ -150,6 +150,17 @@ binary_sensor:
             - light.turn_on: display_bl
 
 text_sensor:
+  - platform: version
+    name: "Sauna ESPHome Version"
+    id: sauna_esphome_version
+    entity_category: "diagnostic"
+    on_value:
+      - lvgl.label.update:
+          id: lbl_esphome_version
+          text: !lambda |-
+            static char buf[42];
+            snprintf(buf, sizeof(buf), "%s", x.c_str());
+            return buf;
   - platform: wifi_info
     ip_address:
       name: "Sauna IP Address"

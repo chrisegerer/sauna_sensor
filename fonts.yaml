@@ -45,5 +45,19 @@
       ]
 - file: "fonts/Helvetica.ttf"
   id: helvetica_verysmall
-  size: 20
+  size: 18
   bpp: 4
+  extras:
+    - file: "fonts/materialdesignicons-webfont.ttf"
+      glyphs: [
+        "\U000F1982", # mdi-ip-outline
+        "\U000F0469", # mdi-router-wireless
+        "\U000F08AE", # mdi-expansion-card
+        "\U000F01D6", # mdi-dns
+        "\U000F008E", # mdi-battery-outline
+        "\U000F089F", # mdi-battery-charging-outline
+        "\U000F095B", # mdi-sine-wave
+        "\U000F035B", # mdi-memory
+        "\U000F05A9", # mdi-wifi
+        "\U000F07D0", # mdi-home-assistant
+      ]

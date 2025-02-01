@@ -126,7 +126,7 @@ pages:
                 grid_cell_y_align: CENTER
                 text: "-.- \U000F0504"
                 text_font: helvetica_small
-  - id: diagnostic_page
+  - id: diagnostic_page_1
     widgets:
       - obj:
           align: CENTER
@@ -139,23 +139,39 @@ pages:
           border_opa: TRANSP
           layout:
             type: GRID
-            grid_columns: [FR(30), FR(70)]
-            grid_rows: [FR(25), FR(25), FR(25), FR(25)]
+            grid_columns: [FR(10), FR(90)]
+            grid_rows: [FR(20), FR(20), FR(20), FR(20), FR(20)]
             pad_row: 4
             pad_column: 8
           widgets:
             - label:
-                id: lbl_diagnostic_ipv4
+                id: lbl_esphome_icon
                 grid_cell_column_pos: 0
                 grid_cell_row_pos: 0
                 grid_cell_x_align: END
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
-                text: "IPv4:"
+                text: "\U000F07D0"
+            - label:
+                id: lbl_esphome_version
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 0
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "--"
+            - label:
+                id: lbl_diagnostic_ipv4
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 1
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "\U000F1982"
             - label:
                 id: lbl_diagnostic_ipv4_value
                 grid_cell_column_pos: 1
-                grid_cell_row_pos: 0
+                grid_cell_row_pos: 1
                 grid_cell_x_align: START
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
@@ -163,15 +179,15 @@ pages:
             - label:
                 id: lbl_diagnostic_ssid
                 grid_cell_column_pos: 0
-                grid_cell_row_pos: 1
+                grid_cell_row_pos: 2
                 grid_cell_x_align: END
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
-                text: "SSID:"
+                text: "\U000F0469"
             - label:
                 id: lbl_diagnostic_ssid_value
                 grid_cell_column_pos: 1
-                grid_cell_row_pos: 1
+                grid_cell_row_pos: 2
                 grid_cell_x_align: START
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
@@ -179,15 +195,15 @@ pages:
             - label:
                 id: lbl_diagnostic_mac
                 grid_cell_column_pos: 0
-                grid_cell_row_pos: 2
+                grid_cell_row_pos: 3
                 grid_cell_x_align: END
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
-                text: "MAC:"
+                text: "\U000F08AE"
             - label:
                 id: lbl_diagnostic_mac_value
                 grid_cell_column_pos: 1
-                grid_cell_row_pos: 2
+                grid_cell_row_pos: 3
                 grid_cell_x_align: START
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
@@ -195,17 +211,115 @@ pages:
             - label:
                 id: lbl_diagnostic_dns
                 grid_cell_column_pos: 0
+                grid_cell_row_pos: 4
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "\U000F01D6"
+            - label:
+                id: lbl_diagnostic_dns_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 4
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "--"
+
+  - id: diagnostic_page_2
+    widgets:
+      - obj:
+          align: CENTER
+          width: 100%
+          height: 100%
+          pad_all: 6
+          pad_top: 50
+          pad_bottom: 40
+          bg_opa: TRANSP
+          border_opa: TRANSP
+          layout:
+            type: GRID
+            grid_columns: [FR(10), FR(90)]
+            grid_rows: [FR(20), FR(20), FR(20), FR(20), FR(20)]
+            pad_row: 4
+            pad_column: 8
+          widgets:
+            - label:
+                id: lbl_diagnostic_wifi_db
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 0
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "\U000F05A9"
+            - label:
+                id: lbl_diagnostic_wifi_db_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 0
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "-- dBm"
+            - label:
+                id: lbl_diagnostic_wifi_percent
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 1
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "\U000F05A9"
+            - label:
+                id: lbl_diagnostic_wifi_percent_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 1
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "-- %"
+            - label:
+                id: lbl_diagnostic_battery_voltage
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 2
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "\U000F095B"
+            - label:
+                id: lbl_diagnostic_battery_voltage_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 2
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "-- V"
+            - label:
+                id: lbl_diagnostic_battery_percent
+                grid_cell_column_pos: 0
                 grid_cell_row_pos: 3
                 grid_cell_x_align: END
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
-                text: "DNS:"
+                text: "\U000F008E"
             - label:
-                id: lbl_diagnostic_dns_value
+                id: lbl_diagnostic_battery_percent_value
                 grid_cell_column_pos: 1
                 grid_cell_row_pos: 3
                 grid_cell_x_align: START
                 grid_cell_y_align: CENTER
                 text_font: helvetica_verysmall
-                text: "--"
-                    
+                text: "-- %"
+            - label:
+                id: lbl_diagnostic_internal_temperature
+                grid_cell_column_pos: 0
+                grid_cell_row_pos: 4
+                grid_cell_x_align: END
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "\U000F035B"
+            - label:
+                id: lbl_diagnostic_internal_temperature_value
+                grid_cell_column_pos: 1
+                grid_cell_row_pos: 4
+                grid_cell_x_align: START
+                grid_cell_y_align: CENTER
+                text_font: helvetica_verysmall
+                text: "-- °C"

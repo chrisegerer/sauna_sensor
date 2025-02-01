@@ -24,6 +24,17 @@
   id: wifi_signal_db
   update_interval: 60s
   entity_category: "diagnostic"
+  on_value:
+    if:
+      condition:
+        wifi.connected:
+      then:
+        - lvgl.label.update:
+            id: lbl_diagnostic_wifi_db_value
+            text: !lambda |-
+              static char buf[10];
+              snprintf(buf, sizeof(buf), "%.1f dBm", x);
+              return buf;
 - platform: copy
   source_id: wifi_signal_db
   name: "Sauna WiFi Signal Percentage"
@@ -49,6 +60,12 @@
               } else {
                 return "\U000F0928"; // mdi-wifi-strength-4
               }
+        - lvgl.label.update:
+            id: lbl_diagnostic_wifi_percent_value
+            text: !lambda |-
+              static char buf[10];
+              snprintf(buf, sizeof(buf), "%.1f %%", x);
+              return buf;
       else:
         - lvgl.label.update:
             id: lbl_wifi_icon
@@ -76,6 +93,13 @@
   update_interval: 60s
   filters:
     - multiply: 2.0
+  on_value:
+    - lvgl.label.update:
+        id: lbl_diagnostic_battery_voltage_value
+        text: !lambda |-
+          static char buf[10];
+          snprintf(buf, sizeof(buf), "%.1f V", x);
+          return buf;
 # Battery percentage
 - platform: copy
   source_id: battery_voltage
@@ -103,6 +127,19 @@
           } else {
             return "\U000F12A3"; // mdi-battery-high
           }
+    - lvgl.label.update:
+        id: lbl_diagnostic_battery_percent_value
+        text: !lambda |-
+          static char buf[10];
+          snprintf(buf, sizeof(buf), "%.1f %%", x);
+          return buf;
 # ESP32 internal temperature
 - platform: internal_temperature
   name: "Sauna ESP32 Internal Temperature"
+  on_value:
+    - lvgl.label.update:
+        id: lbl_diagnostic_internal_temperature_value
+        text: !lambda |-
+          static char buf[10];
+          snprintf(buf, sizeof(buf), "%.1f °C", x);
+          return buf;
