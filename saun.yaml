@@ -51,6 +51,8 @@ light:
     name: "Display Backlight"
     output: display_bl_output
     restore_mode: ALWAYS_ON
+    disabled_by_default: true
+    entity_category: "config"
 
 time:
   - platform: homeassistant
