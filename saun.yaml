@@ -4,7 +4,7 @@ esphome:
 esp32:
   board: seeed_xiao_esp32c3
   framework:
-    type: arduino
+    type: esp-idf
 
 # Enable logging
 logger:
@@ -132,7 +132,7 @@ binary_sensor:
     id: home_button
     entity_category: "diagnostic"
     pin:
-      number: 21
+      number: 5
       mode:
         input: true
         pullup: true
@@ -228,7 +228,7 @@ number:
     optimistic: true
     id: display_timeout
     unit_of_measurement: "s"
-    initial_value: 60
+    initial_value: 30
     restore_value: true
     min_value: 30
     max_value: 300

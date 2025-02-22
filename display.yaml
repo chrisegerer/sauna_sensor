@@ -9,7 +9,7 @@
     swap_xy: true
     mirror_x: true
   cs_pin: GPIO03
-  dc_pin: GPIO05
+  dc_pin: GPIO21
   reset_pin: GPIO20
   color_palette: GRAYSCALE
   invert_colors: false
