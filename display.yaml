@@ -10,7 +10,7 @@
     mirror_x: true
   cs_pin: GPIO03
   dc_pin: GPIO21
-  reset_pin: GPIO20
+  reset_pin: GPIO2
   color_palette: GRAYSCALE
   invert_colors: false
   #show_test_card: true

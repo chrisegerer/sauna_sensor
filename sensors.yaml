@@ -143,3 +143,10 @@
           static char buf[10];
           snprintf(buf, sizeof(buf), "%.1f °C", x);
           return buf;
+# Wakeup sensor
+- platform: template
+  name: "Wakeup Cause"
+  id: wakeup_cause
+  entity_category: "diagnostic"
+  accuracy_decimals: 0
+  lambda: return static_cast<float>(esp_sleep_get_wakeup_cause());
