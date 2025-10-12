@@ -9,6 +9,10 @@
             static char buf[10];
             snprintf(buf, sizeof(buf), "%.1f \U000F0504", x);
             return buf;
+    filters:
+      - sliding_window_moving_average:
+          window_size: 20
+          send_every: 20
   humidity:
     name: "Sauna Relative Humidity"
     on_value:
@@ -18,6 +22,11 @@
             static char buf[10];
             snprintf(buf, sizeof(buf), "%.1f \U000F03F0", x);
             return buf;
+    filters:
+      - sliding_window_moving_average:
+          window_size: 20
+          send_every: 20
+  update_interval: 1s
 # WiFi sensor
 - platform: wifi_signal
   name: "Sauna WiFi Signal"

@@ -27,6 +27,7 @@ esphome:
 
 esp32:
   board: seeed_xiao_esp32c3
+  cpu_frequency: 80MHz
   framework:
     type: esp-idf
 
@@ -265,7 +266,7 @@ deep_sleep:
   run_duration:
     default: 10s
     gpio_wakeup_reason: 60s
-  sleep_duration: 900s
+  sleep_duration: 1200s
   wakeup_pin:
     number: GPIO05
     inverted: true
