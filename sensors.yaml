@@ -2,13 +2,39 @@
 - platform: sht4x
   temperature:
     name: "Sauna Temperature"
+    id: sauna_temperature
     on_value:
-      - lvgl.label.update:
-          id: lbl_temp
-          text: !lambda |-
-            static char buf[10];
-            snprintf(buf, sizeof(buf), "%.1f \U000F0504", x);
-            return buf;
+      - then:
+        - lvgl.label.update:
+            id: lbl_temp
+            text: !lambda |-
+              static char buf[10];
+              snprintf(buf, sizeof(buf), "%.1f \U000F0504", x);
+              return buf;
+    # change sleep duration based on sauna temperature
+    on_value_range:
+        # sleep for 30min below 40deg
+        - below: 40.0
+          then:
+            - lambda: |-
+                id(deep_sleep_default).set_sleep_duration(1800000);
+        # sleep for 20min below 50deg
+        - above: 40.1
+          below: 50.0
+          then:
+            - lambda: |-
+                id(deep_sleep_default).set_sleep_duration(1200000);
+        # sleep for 10min below 60deg
+        - above: 50.1
+          below: 60.0
+          then:
+            - lambda: |-
+                id(deep_sleep_default).set_sleep_duration(600000);
+        # sleep for 5min above 60deg
+        - above: 60.1
+          then:
+            - lambda: |-
+                id(deep_sleep_default).set_sleep_duration(300000);
     filters:
       - sliding_window_moving_average:
           window_size: 20

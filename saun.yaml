@@ -263,10 +263,11 @@ number:
     mode: box
 
 deep_sleep:
+  id: deep_sleep_default
   run_duration:
     default: 10s
     gpio_wakeup_reason: 60s
-  sleep_duration: 1200s
+  sleep_duration: 1800s
   wakeup_pin:
     number: GPIO05
     inverted: true
