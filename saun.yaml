@@ -6,8 +6,7 @@ esphome:
           esp_sleep_source_t wakeup_reason = esp_sleep_get_wakeup_cause();
           if (wakeup_reason == ESP_SLEEP_WAKEUP_EXT0 ||
               wakeup_reason == ESP_SLEEP_WAKEUP_EXT1 ||
-              wakeup_reason == ESP_SLEEP_WAKEUP_GPIO ||
-              wakeup_reason == ESP_SLEEP_WAKEUP_UNDEFINED) {
+              wakeup_reason == ESP_SLEEP_WAKEUP_GPIO ) {
               auto turn_on = id(display_bl).turn_on();
               turn_on.perform();
           } else {
@@ -54,6 +53,12 @@ wifi:
 
 captive_portal:
 
+
+globals:
+  - id: sleep_duration_sec
+    type: int
+    restore_value: yes
+    initial_value: '1800'
 
 i2c:
   sda: GPIO06

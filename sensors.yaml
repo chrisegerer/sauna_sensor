@@ -17,24 +17,35 @@
         - below: 40.0
           then:
             - lambda: |-
-                id(deep_sleep_default).set_sleep_duration(1800000);
+                id(sleep_duration_sec) = 1800;
+                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
         # sleep for 20min below 50deg
-        - above: 40.1
+        - above: 40.0
           below: 50.0
           then:
             - lambda: |-
-                id(deep_sleep_default).set_sleep_duration(1200000);
+                id(sleep_duration_sec) = 1200;
+                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
         # sleep for 10min below 60deg
-        - above: 50.1
+        - above: 50.0
           below: 60.0
           then:
             - lambda: |-
-                id(deep_sleep_default).set_sleep_duration(600000);
-        # sleep for 5min above 60deg
-        - above: 60.1
+                id(sleep_duration_sec) = 600;
+                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
+        # sleep for 5min below 70deg
+        - above: 60.0
+          below: 70.0
           then:
             - lambda: |-
-                id(deep_sleep_default).set_sleep_duration(300000);
+                id(sleep_duration_sec) = 300;
+                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
+        # sleep for 5min below 70deg
+        - above: 70.0
+          then:
+            - lambda: |-
+                id(sleep_duration_sec) = 60;
+                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
     filters:
       - sliding_window_moving_average:
           window_size: 20
@@ -185,3 +196,11 @@
   entity_category: "diagnostic"
   accuracy_decimals: 0
   lambda: return static_cast<float>(esp_sleep_get_wakeup_cause());
+# Sleep duration
+- platform: template
+  name: "Sleep Duration"
+  id: sleep_duration_sensor
+  entity_category: "diagnostic"
+  unit_of_measurement: "s"
+  accuracy_decimals: 0
+  lambda: return static_cast<float>(id(sleep_duration_sec));
