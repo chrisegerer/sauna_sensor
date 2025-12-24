@@ -219,10 +219,6 @@ text_sensor:
               static char buf[42];
               snprintf(buf, sizeof(buf), "%s", x.c_str());
               return buf;
-    bssid:
-      name: "Sauna BSSID"
-      id: sauna_bssid
-      entity_category: "diagnostic"
     mac_address:
       name: "Sauna MAC Address"
       id: sauna_mac_address
