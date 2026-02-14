@@ -64,6 +64,20 @@
           window_size: 20
           send_every: 20
   update_interval: 1s
+# Temperature delta
+- platform: copy
+  source_id: sauna_temperature
+  name: "Sauna Temperature Delta"
+  id: sauna_temperature_delta
+  unit_of_measurement: "°C"
+  filters:
+    - sliding_window_moving_average:
+        window_size: 60
+        send_every: 60
+    - lambda: |-
+        auto delta = x - id(last_temp);
+        id(last_temp) = x;
+        return delta;
 # WiFi sensor
 - platform: wifi_signal
   name: "Sauna WiFi Signal"

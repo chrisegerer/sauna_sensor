@@ -59,6 +59,10 @@ globals:
     type: int
     restore_value: yes
     initial_value: '1800'
+  - id: last_temp
+    type: float
+    restore_value: yes
+    initial_value: '20.0'
 
 i2c:
   sda: GPIO06
