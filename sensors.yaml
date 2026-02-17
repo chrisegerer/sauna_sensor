@@ -144,7 +144,7 @@
           return buf;
 # Battery voltage
 - platform: adc
-  pin: GPIO04
+  pin: GPIO02
   name: "Sauna Battery Voltage"
   id: battery_voltage
   entity_category: "diagnostic"
