@@ -1,4 +1,5 @@
 - platform: ili9xxx
+  id: display_main
   model: st7789v
   dimensions:
     width: 280
@@ -10,7 +11,7 @@
     mirror_x: true
   cs_pin: GPIO01
   dc_pin: GPIO16
-  reset_pin: GPIO21
+  reset_pin: GPIO17
   color_palette: GRAYSCALE
   invert_colors: false
   #show_test_card: true

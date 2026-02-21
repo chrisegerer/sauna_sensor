@@ -8,6 +8,9 @@ esphome:
             if (wakeup_reason == ESP_SLEEP_WAKEUP_EXT0 ||
                 wakeup_reason == ESP_SLEEP_WAKEUP_EXT1 ||
                 wakeup_reason == ESP_SLEEP_WAKEUP_GPIO ) {
+                uint8_t cmd_slpout = 0x11;
+                id(display_main).command(cmd_slpout);
+                gpio_hold_dis(GPIO_NUM_21);
                 auto turn_on = id(display_bl).turn_on();
                 turn_on.perform();
             } else {
@@ -15,8 +18,6 @@ esphome:
                 turn_off.perform();
             }
             gpio_hold_dis(GPIO_NUM_6);
-            gpio_hold_dis(GPIO_NUM_17);
-            //gpio_deep_sleep_hold_en();
             id(sensor_power).turn_on();
   on_shutdown:
     then:
@@ -24,10 +25,11 @@ esphome:
           ESP_LOGI("saun", "Entering deep sleep");
           auto turn_off = id(display_bl).turn_off();
           turn_off.perform();
+          uint8_t cmd_slpin = 0x10;
+          id(display_main).command(cmd_slpin);
           id(sensor_power).turn_off();
-          gpio_hold_en(GPIO_NUM_17);
+          gpio_hold_en(GPIO_NUM_21);
           gpio_hold_en(GPIO_NUM_6);
-          //gpio_deep_sleep_hold_en();
 
 esp32:
   board: seeed_xiao_esp32c6
@@ -66,7 +68,7 @@ globals:
   - id: sleep_duration_sec
     type: int
     restore_value: yes
-    initial_value: '1800'
+    initial_value: '1200'
   - id: last_temp
     type: float
     restore_value: yes
@@ -85,7 +87,11 @@ spi:
 
 output:
   - platform: ledc
-    pin: GPIO17
+    pin:
+      number: GPIO21
+      mode:
+        output: true
+        pulldown: true
     id: display_bl_output
 
 light:
@@ -93,7 +99,7 @@ light:
     id: display_bl
     name: "Display Backlight"
     output: display_bl_output
-    restore_mode: ALWAYS_OFF
+    restore_mode: RESTORE_DEFAULT_OFF
     disabled_by_default: true
     entity_category: "config"
 
@@ -286,8 +292,9 @@ deep_sleep:
   run_duration:
     default: 10s
     gpio_wakeup_reason: 60s
-  sleep_duration: 1800s
+  sleep_duration: 60s
   wakeup_pin:
-    number: GPIO00
-    inverted: true
-    allow_other_uses: true
+    - pin:
+        number: GPIO00
+        inverted: true
+        allow_other_uses: true
