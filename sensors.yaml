@@ -1,5 +1,6 @@
 # Sensirion SHT40 sensor
 - platform: sht4x
+  update_interval: 1s
   temperature:
     name: "Sauna Temperature"
     id: sauna_temperature
@@ -11,45 +12,28 @@
               static char buf[10];
               snprintf(buf, sizeof(buf), "%.1f \U000F0504", x);
               return buf;
-    # change sleep duration based on sauna temperature
-    on_value_range:
-        # sleep for 30min below 40deg
-        - below: 40.0
-          then:
-            - lambda: |-
-                id(sleep_duration_sec) = 1800;
-                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
-        # sleep for 20min below 50deg
-        - above: 40.0
-          below: 50.0
-          then:
-            - lambda: |-
-                id(sleep_duration_sec) = 1200;
-                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
-        # sleep for 10min below 60deg
-        - above: 50.0
-          below: 60.0
-          then:
-            - lambda: |-
-                id(sleep_duration_sec) = 600;
-                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
-        # sleep for 5min below 70deg
-        - above: 60.0
-          below: 70.0
-          then:
-            - lambda: |-
-                id(sleep_duration_sec) = 300;
-                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
-        # sleep for 5min below 70deg
-        - above: 70.0
-          then:
-            - lambda: |-
-                id(sleep_duration_sec) = 60;
-                id(deep_sleep_default).set_sleep_duration(id(sleep_duration_sec) * 1000);
+      - then:
+        - lambda: |-
+            if (x < 40.0) {
+              id(sleep_duration_sec) = 20 * 60;
+              id(deep_sleep_default).set_sleep_duration(20*60*1000);
+            } else if (x < 50.0) {
+              id(sleep_duration_sec) = 15 * 60;
+              id(deep_sleep_default).set_sleep_duration(15*60*1000);
+            } else if (x < 60.0) {
+              id(sleep_duration_sec) = 10 * 60;
+              id(deep_sleep_default).set_sleep_duration(10*60*1000);
+            } else if (x < 70.0) {
+              id(sleep_duration_sec) = 5 * 60;
+              id(deep_sleep_default).set_sleep_duration(5*60*1000);
+            } else {
+              id(sleep_duration_sec) = 1 * 60;
+              id(deep_sleep_default).set_sleep_duration(1*60*1000);
+            }
     filters:
       - sliding_window_moving_average:
-          window_size: 20
-          send_every: 20
+          window_size: 10
+          send_every: 10
   humidity:
     name: "Sauna Relative Humidity"
     on_value:
@@ -61,9 +45,8 @@
             return buf;
     filters:
       - sliding_window_moving_average:
-          window_size: 20
-          send_every: 20
-  update_interval: 1s
+          window_size: 10
+          send_every: 10
 # Temperature delta
 - platform: copy
   source_id: sauna_temperature
@@ -72,8 +55,8 @@
   unit_of_measurement: "°C"
   filters:
     - sliding_window_moving_average:
-        window_size: 60
-        send_every: 60
+        window_size: 10
+        send_every: 10
     - lambda: |-
         auto delta = x - id(last_temp);
         id(last_temp) = x;
@@ -144,7 +127,7 @@
           return buf;
 # Battery voltage
 - platform: adc
-  pin: GPIO04
+  pin: GPIO02
   name: "Sauna Battery Voltage"
   id: battery_voltage
   entity_category: "diagnostic"
