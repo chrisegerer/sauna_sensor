@@ -8,8 +8,8 @@ esphome:
             if (wakeup_reason == ESP_SLEEP_WAKEUP_EXT0 ||
                 wakeup_reason == ESP_SLEEP_WAKEUP_EXT1 ||
                 wakeup_reason == ESP_SLEEP_WAKEUP_GPIO ) {
-                uint8_t cmd_slpout = 0x11;
-                id(display_main).command(cmd_slpout);
+                //uint8_t cmd_slpout = 0x11;
+                //id(display_main).command(cmd_slpout);
                 gpio_hold_dis(GPIO_NUM_21);
                 auto turn_on = id(display_bl).turn_on();
                 turn_on.perform();
@@ -25,8 +25,8 @@ esphome:
           ESP_LOGI("saun", "Entering deep sleep");
           auto turn_off = id(display_bl).turn_off();
           turn_off.perform();
-          uint8_t cmd_slpin = 0x10;
-          id(display_main).command(cmd_slpin);
+          //uint8_t cmd_slpin = 0x10;
+          //id(display_main).command(cmd_slpin);
           id(sensor_power).turn_off();
           gpio_hold_en(GPIO_NUM_21);
           gpio_hold_en(GPIO_NUM_6);

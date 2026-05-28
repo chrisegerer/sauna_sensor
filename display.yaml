@@ -1,4 +1,4 @@
-- platform: ili9xxx
+- platform: mipi_spi
   id: display_main
   model: st7789v
   dimensions:
@@ -9,10 +9,11 @@
   transform:
     swap_xy: true
     mirror_x: true
+    mirror_y: false
   cs_pin: GPIO01
   dc_pin: GPIO16
   reset_pin: GPIO17
-  color_palette: GRAYSCALE
+  #color_depth: 8
   invert_colors: false
   #show_test_card: true
   auto_clear_enabled: false
