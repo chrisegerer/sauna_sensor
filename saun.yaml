@@ -207,6 +207,9 @@ binary_sensor:
               - lvgl.resume:
               - lvgl.widget.redraw:
         - light.turn_on: display_bl
+    filters:
+      - delayed_on: 20ms
+      - delayed_off: 20ms
 
 text_sensor:
   - platform: version
